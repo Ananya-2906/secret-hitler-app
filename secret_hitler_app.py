@@ -47,4 +47,3 @@ if st.session_state.roles:
             if st.button(f"Reveal role for {player_label}", key=f"reveal_{i}"):
                 st.session_state.revealed_player = i
                 st.rerun()
-

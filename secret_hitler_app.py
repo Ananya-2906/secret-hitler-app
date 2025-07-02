@@ -85,3 +85,14 @@ if st.session_state.roles and st.session_state.player_names:
             if st.button(f"Reveal role for {player_name}", key=f"reveal_{i}"):
                 st.session_state.revealed_player = i
                 st.rerun()
+
+# Offer option to play again with same settings
+if st.session_state.roles and len(st.session_state.viewed_players) == len(st.session_state.roles):
+    st.markdown("---")
+    if st.button("🔁 Next Game with Same Players"):
+        st.session_state.roles = get_roles(len(st.session_state.roles))
+        st.session_state.revealed_player = None
+        st.session_state.viewed_players = set()
+        st.success("New roles generated. Start revealing again!")
+        st.rerun()
+

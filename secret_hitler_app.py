@@ -51,7 +51,7 @@ for i in range(len(st.session_state.roles)):
                     continue
                 if r == "Fascist":
                     teammates.append(f"Player {j+1}")
-                elif r == "Hitler" and len(st.session_state.roles) >= 7:
+                elif r == "Hitler":
                     teammates.append(f"Player {j+1} (Hitler)")
             st.info(f"Your teammates are: {', '.join(teammates)}")
 

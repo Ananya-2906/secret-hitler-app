@@ -28,9 +28,9 @@ if not st.session_state.roles:
 if st.session_state.roles:
     st.header("🕵️ Player Role Reveal")
 
-    for i in range(len(st.session_state.roles)):
+for i in range(len(st.session_state.roles)):
     player_label = f"Player {i+1}"
-
+    
     # Check if previous player has locked their role
         if i > 0 and (i - 1) not in st.session_state.viewed_players:
             st.warning(f"Please wait for Player {i} to finish before {player_label} can view.")

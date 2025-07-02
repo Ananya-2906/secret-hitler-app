@@ -32,43 +32,43 @@ for i in range(len(st.session_state.roles)):
     player_label = f"Player {i+1}"
     
     # Check if previous player has locked their role
-        if i > 0 and (i - 1) not in st.session_state.viewed_players:
-            st.warning(f"Please wait for Player {i} to finish before {player_label} can view.")
-            continue
-    
-        if i in st.session_state.viewed_players:
-            st.markdown(f"✅ {player_label} has seen their role.")
-            continue
-    
-        if st.session_state.revealed_player == i:
-            role = st.session_state.roles[i]
-            st.subheader(f"🧑 {player_label}, your role is: **{role}**")
-    
-            if role == "Fascist":
-                teammates = []
-                for j, r in enumerate(st.session_state.roles):
-                    if j == i:
-                        continue
-                    if r == "Fascist":
-                        teammates.append(f"Player {j+1}")
-                    elif r == "Hitler" and len(st.session_state.roles) >= 7:
-                        teammates.append(f"Player {j+1} (Hitler)")
-                st.info(f"Your teammates are: {', '.join(teammates)}")
-    
-            elif role == "Hitler":
-                if len(st.session_state.roles) <= 6:
-                    teammates = [j+1 for j, r in enumerate(st.session_state.roles) if r == "Fascist"]
-                    st.info(f"The fascist(s) are: Player(s): {', '.join(map(str, teammates))}")
-                else:
-                    st.info("You don't know who the fascists are.")
-    
-            if st.button("🔒 Hide and lock", key=f"hide_{i}"):
-                st.session_state.viewed_players.add(i)
-                st.session_state.revealed_player = None
-                st.rerun()
-    
-        else:
-            if st.button(f"Reveal role for {player_label}", key=f"reveal_{i}"):
-                st.session_state.revealed_player = i
-                st.rerun()
-    
+    if i > 0 and (i - 1) not in st.session_state.viewed_players:
+        st.warning(f"Please wait for Player {i} to finish before {player_label} can view.")
+        continue
+
+    if i in st.session_state.viewed_players:
+        st.markdown(f"✅ {player_label} has seen their role.")
+        continue
+
+    if st.session_state.revealed_player == i:
+        role = st.session_state.roles[i]
+        st.subheader(f"🧑 {player_label}, your role is: **{role}**")
+
+        if role == "Fascist":
+            teammates = []
+            for j, r in enumerate(st.session_state.roles):
+                if j == i:
+                    continue
+                if r == "Fascist":
+                    teammates.append(f"Player {j+1}")
+                elif r == "Hitler" and len(st.session_state.roles) >= 7:
+                    teammates.append(f"Player {j+1} (Hitler)")
+            st.info(f"Your teammates are: {', '.join(teammates)}")
+
+        elif role == "Hitler":
+            if len(st.session_state.roles) <= 6:
+                teammates = [j+1 for j, r in enumerate(st.session_state.roles) if r == "Fascist"]
+                st.info(f"The fascist(s) are: Player(s): {', '.join(map(str, teammates))}")
+            else:
+                st.info("You don't know who the fascists are.")
+
+        if st.button("🔒 Hide and lock", key=f"hide_{i}"):
+            st.session_state.viewed_players.add(i)
+            st.session_state.revealed_player = None
+            st.rerun()
+
+    else:
+        if st.button(f"Reveal role for {player_label}", key=f"reveal_{i}"):
+            st.session_state.revealed_player = i
+            st.rerun()
+
